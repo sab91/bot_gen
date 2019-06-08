@@ -4,7 +4,9 @@ import bodyParser from 'body-parser';
 
 
 const app = express();
-
+app.use(express.static('public'))
+app.set('view engine', 'pug');
+app.set('views', './views')
 // Parse incoming requests data
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
