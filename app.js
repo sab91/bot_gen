@@ -1,13 +1,10 @@
 import express from 'express';
 import db from './db/db';// Set up the express app
 import bodyParser from 'body-parser';
-<<<<<<< HEAD
 const dashboard = require('./routes/dashboard')
 const bots = require('./routes/bots')
-=======
-import AWS from 'aws-sdk'
 
->>>>>>> 9517f772a728db9d52c882be8ae79f0c475773c6
+import AWS from 'aws-sdk'
 
 const app = express();
 const lexmodelbuildingservice = new AWS.LexModelBuildingService({ region: 'us-east-1'});
