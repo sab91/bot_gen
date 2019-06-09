@@ -1,0 +1,59 @@
+extends layouts/common.pug
+block content
+    // Navigation
+    nav.navbar.navbar-expand-lg.navbar-light.bg-light.shadow.fixed-top
+        .container
+            a.navbar-brand(href='#') Gestion de Bots
+            button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarResponsive', aria-controls='navbarResponsive', aria-expanded='false', aria-label='Toggle navigation')
+                span.navbar-toggler-icon
+            #navbarResponsive.collapse.navbar-collapse
+                ul.navbar-nav.ml-auto
+                    li.nav-item.active
+                        a.nav-link(href='#')
+                            | Bots
+                            span.sr-only (current)
+                    li.nav-item
+                        a.nav-link(href='#') Intents
+                    li.nav-item
+                        a.nav-link(href='#') Services
+                    li.nav-item
+                        a.nav-link(href='#') Contact
+    // Full Page Image Header with Vertically Centered Content
+    header.masthead
+        .container.h-100
+            .row.h-100.align-items-center
+                .col-12
+                    button.btn.btn-primary(type='button').mb-1#createBots Create
+                    table.table.table-dark
+                        thead
+                            tr
+                                th(scope='col') #
+                                th(scope='col') Name
+                                th(scope='col') Status
+                                th(scope='col') Last updated
+                                th(scope='col') Date Created
+                        tbody
+                            tr
+                                th(scope='row') 1
+                                td Mark
+                                td READY
+                                td Otto
+                                td @mdo
+                            tr
+                                th(scope='row') 2
+                                td Jacob
+                                td READY
+                                td Thornton
+                                td @fat
+                            tr
+                                th(scope='row') 3
+                                td Larry
+                                td READY
+                                td the Bird
+                                td @twitter
+    // Page Content
+    section.py-5
+        .container
+            h2.font-weight-light Page Content
+            p
+                | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus ab nulla dolorum autem nisi officiis blanditiis voluptatem hic, assumenda aspernatur facere ipsam nemo ratione cumque magnam enim fugiat reprehenderit expedita.

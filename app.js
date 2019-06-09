@@ -1,7 +1,8 @@
 import express from 'express';
 import db from './db/db';// Set up the express app
 import bodyParser from 'body-parser';
-
+const dashboard = require('./routes/dashboard')
+const bots = require('./routes/bots')
 
 const app = express();
 app.use(express.static('public'))
@@ -19,8 +20,8 @@ app.get('/api/v1/todos', (req, res) => {
         todos: db
     })
 });
-
-
+app.use('/dashboard', dashboard);
+app.use('/bots', bots);
 const PORT = 5000;
 
 app.listen(PORT, () => {
