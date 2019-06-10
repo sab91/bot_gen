@@ -3,7 +3,7 @@ AWS.config.loadFromPath('./config/config.json');
 const lexmodelbuildingservice = new AWS.LexModelBuildingService({ region: 'us-east-1'});
 module.exports.index = (req, res) => {
     let paramsGetBots={
-        maxResults:50,
+        maxResults:40,
         nextToken:""
       }
       lexmodelbuildingservice.getBots(paramsGetBots, function(err, data) {
@@ -14,7 +14,7 @@ module.exports.index = (req, res) => {
             res.render('bots');
           }
       });
-    
+
 }
 module.exports.create = (req, res) => {
     res.render('createBots')
