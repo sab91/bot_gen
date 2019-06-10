@@ -33,24 +33,13 @@ block content
                                 th(scope='col') Last updated
                                 th(scope='col') Date Created
                         tbody
-                            tr
-                                th(scope='row') 1
-                                td Mark
-                                td READY
-                                td Otto
-                                td @mdo
-                            tr
-                                th(scope='row') 2
-                                td Jacob
-                                td READY
-                                td Thornton
-                                td @fat
-                            tr
-                                th(scope='row') 3
-                                td Larry
-                                td READY
-                                td the Bird
-                                td @twitter
+                            each bot in bots
+                                tr
+                                    th(scope='row') 1
+                                    td= bot.name
+                                    td= bot.status
+                                    td= bot.lastUpdatedDate
+                                    td= bot.createdDate
     // Page Content
     section.py-5
         .container
