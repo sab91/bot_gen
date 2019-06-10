@@ -1,7 +1,7 @@
 import AWS from 'aws-sdk';
 AWS.config.loadFromPath('./config/config.json');
 const lexmodelbuildingservice = new AWS.LexModelBuildingService({ region: 'us-east-1'});
-module.exports.index = (req, res) => {
+module.exports.listBots = (req, res) => {
     let paramsGetBots={
         maxResults:50,
         nextToken:""
@@ -11,7 +11,9 @@ module.exports.index = (req, res) => {
             console.log(err, err.stack);
           }else {
             console.log(data);
-            res.render('bots');
+            res.render('bots',{
+                bots: data.bots
+            });
           }
       });
     
