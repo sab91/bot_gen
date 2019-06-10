@@ -1,3 +1,4 @@
+config/config.json
 # Don't track content of these folders
 node_modules/
 .DS_Store
