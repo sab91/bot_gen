@@ -3,7 +3,7 @@ block content
     // Navigation
     nav.navbar.navbar-expand-lg.navbar-light.bg-light.shadow.fixed-top
         .container
-            a.navbar-brand(href='#') Gestion de Bots
+            a.navbar-brand(href='/dashboard') Gestion de Bots
             button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarResponsive', aria-controls='navbarResponsive', aria-expanded='false', aria-label='Toggle navigation')
                 span.navbar-toggler-icon
             #navbarResponsive.collapse.navbar-collapse
@@ -23,20 +23,20 @@ block content
         .container.h-100
             .row.h-100.align-items-center
                 .col-12
-                    form
+                    form(action="/bots/create", method="POST")
                         .form-group
-                            label(for='inputAddress') Nom du bot
-                            input#inputNomBot.form-control(type='text', placeholder='1234 Main St')
+                            label(for='inputNomBot') Nom du bot
+                            input#inputNomBot.form-control(name='nom', type='text', placeholder='1234 Main St')
                         .form-group
-                            label(for='inputAddress2') Description
-                            input#inputDescription.form-control(type='text', placeholder='Apartment, studio, or floor')
+                            label(for='inputDescription') Description
+                            input#inputDescription.form-control(name='description',type='text', placeholder='Apartment, studio, or floor')
                         .form-group
-                            label(for='inputCity') Déclaration d'abandon
-                            input#inputCity.form-control(type='text', placeholder='Quand Bot ne comprend pas la saisie de l\'utilisateur dans son contexte')
+                            label(for='inputAbandon') Déclaration d'abandon
+                            input#inputAbandon.form-control(name='abandon',type='text', placeholder='Quand Bot ne comprend pas la saisie de l\'utilisateur dans son contexte')
                         .form-group
-                            label(for='inputState') Clarification invite
-                            input#inputState.form-control(type='text', placeholder='Quand Amazon Lex ne comprend pas l\'intention de l\'utilisateur')
-                        button.btn.btn-primary(type='submit') Sign in
+                            label(for='inputClarification') Clarification invite
+                            input#inputClarification.form-control(name='clarification',type='text', placeholder='Quand Amazon Lex ne comprend pas l\'intention de l\'utilisateur')
+                        button.btn.btn-primary(type='submit') Create
 
     // Page Content
     section.py-5

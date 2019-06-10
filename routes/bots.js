@@ -1,10 +1,8 @@
 const express = require('express');
+const controller = require('../controller/bots.controller')
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    res.render('bots');
-})
-router.get('/create', (req, res) => {
-    res.render('createBots')
-})
+router.get('/', controller.index)
+router.get('/create', controller.create)
+router.post('/create', controller.postCreate)
 module.exports = router
