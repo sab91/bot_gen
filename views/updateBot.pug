@@ -1,0 +1,41 @@
+extends layouts/common.pug
+block content
+    // Navigation
+    nav.navbar.navbar-expand-lg.navbar-light.bg-light.shadow.fixed-top
+        .container
+            a.navbar-brand(href='/dashboard') Gestion de Bots
+            button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarResponsive', aria-controls='navbarResponsive', aria-expanded='false', aria-label='Toggle navigation')
+                span.navbar-toggler-icon
+            #navbarResponsive.collapse.navbar-collapse
+                ul.navbar-nav.ml-auto
+                    li.nav-item.active
+                        a.nav-link(href='/bots')
+                            | Bots
+                            span.sr-only (current)
+                    li.nav-item
+                        a.nav-link(href='/intents') Intents
+                    li.nav-item
+                        a.nav-link(href='/test') Test
+                    li.nav-item
+                        a.nav-link(href='#') Contact
+    // Full Page Image Header with Vertically Centered Content
+    header.masthead
+        .container.h-100
+            .row.h-100.align-items-center
+                .col-12
+                    if errorMessage
+                        .alert.alert-danger= errorMessage
+                    form(action="/bots/create", method="POST")
+                        .form-group
+                            label(for='inputNomBot') Nom du bot (*)
+                            input#inputNomBot.form-control(name='nom', type='text', placeholder='1234 Main St', value=params?params.name:'')
+                        .form-group
+                            label(for='inputDescription') Description
+                            input#inputDescription.form-control(name='description',type='text', placeholder='Apartment, studio, or floor',value=params?params.description:'')
+                        .form-group
+                            label(for='inputAbandon') Déclaration d'abandon (*)
+                            input#inputAbandon.form-control(name='abandon',type='text', placeholder='Quand Bot ne comprend pas la saisie de l\'utilisateur dans son contexte',value=params?params.abortStatement.messages[0].content:'')
+                        .form-group
+                            label(for='inputClarification') Clarification invite (*)
+                            input#inputClarification.form-control(name='clarification',type='text', placeholder='Quand Amazon Lex ne comprend pas l\'intention de l\'utilisateur',value=params?params.clarificationPrompt.messages[0].content:'')
+                        button.btn.btn-primary(type='submit') Create

@@ -22,7 +22,7 @@ block content
     header.masthead
         .container.h-100
             .row.h-100.align-items-center
-                .col-12
+                div
                     a.btn.btn-primary.mt-1(type='button', href='/bots/create').mb-1#createBots Create
                     table.table.table-dark
                         thead
@@ -32,6 +32,7 @@ block content
                                 th(scope='col') Status
                                 th(scope='col') Last updated
                                 th(scope='col') Date Created
+                                th(scope='col') Actions
                         tbody
                             each bot, index in bots
                                 tr

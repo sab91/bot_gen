@@ -21,6 +21,14 @@ module.exports.listBots = (req, res) => {
 module.exports.create = (req, res) => {
   res.render('createBots')
 }
+module.exports.update = (req, res) => {
+  res.render('updateBot', {
+    bot: req.body
+  })
+}
+module.exports.putUpdate = (req, res) => {
+  
+}
 module.exports.postCreate = (req, res) => {
   let params = {
     name: req.body.nom,
