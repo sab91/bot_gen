@@ -28,10 +28,11 @@ block content
                         thead
                             tr
                                 th(scope='col') #
-                                th(scope='col') Name
+                                th(scope='col')#name Name
                                 th(scope='col') Status
                                 th(scope='col') Last updated
                                 th(scope='col') Date Created
+                                td(scope='col') Actions
                         tbody
                             each bot, index in bots
                                 tr
@@ -40,3 +41,13 @@ block content
                                     td= bot.status
                                     td= bot.lastUpdatedDate
                                     td= bot.createdDate
+                                    td
+                                      .row
+                                        .col-12
+                                          form(action="/bots/update", method="GET")
+                                            input#inputNomBot.form-control(name='nom', type='hidden',value=bot.name)
+                                            button(type='submit') Modify
+                                        .col-12
+                                          form(action="/bots/delete", method="GET")
+                                            input#inputNomBot.form-control(name='nom', type='hidden',value=bot.name)
+                                            button(type='submit') Delete
