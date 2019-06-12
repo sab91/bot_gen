@@ -27,7 +27,6 @@ module.exports.update = (req, res) => {
   })
 }
 module.exports.putUpdate = (req, res) => {
-  
 }
 module.exports.postCreate = (req, res) => {
   let params = {
@@ -64,4 +63,7 @@ module.exports.postCreate = (req, res) => {
 
 
   console.log(req.body)
+}
+module.exports.deleteBot = (error,req,res,next) =>{
+  res.redirect('/bots')
 }

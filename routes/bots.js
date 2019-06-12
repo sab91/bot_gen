@@ -7,4 +7,5 @@ router.get('/create', controller.create)
 router.post('/create', controller.postCreate)
 router.get('/update', controller.update)
 router.put('/update', controller.putUpdate)
+router.delete('/delete/:nameBot', controller.deleteBot)
 module.exports = router

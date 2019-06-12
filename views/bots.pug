@@ -49,6 +49,6 @@ block content
                                             input#inputNomBot.form-control(name='nom', type='hidden',value=bot.name)
                                             button(type='submit') Modify
                                         .col-12
-                                          form(action="/bots/delete", method="GET")
+                                          form(action="/bots/delete/" + bot.name, method="DELETE")
                                             input#inputNomBot.form-control(name='nom', type='hidden',value=bot.name)
                                             button(type='submit') Delete
