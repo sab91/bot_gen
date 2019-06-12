@@ -3,6 +3,7 @@ import db from './db/db';// Set up the express app
 import bodyParser from 'body-parser';
 const dashboard = require('./routes/dashboard')
 const bots = require('./routes/bots')
+const intents = require('./routes/intents')
 
 import AWS from 'aws-sdk'
 
@@ -26,7 +27,7 @@ app.get('/api/v1/todos', (req, res) => {
 });
 app.use('/dashboard', dashboard);
 app.use('/bots', bots);
-
+app.use('/intents', intents);
 
 const params = {
     name: "DocOrderPizzaBot",

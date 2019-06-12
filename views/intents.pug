@@ -33,10 +33,10 @@ block content
                                 th(scope='col') Last updated
                                 th(scope='col') Date Created
                         tbody
-                            each bot, index in bots
+                            each intent, index in intents
                                 tr
                                     th(scope='row')= index + 1
-                                    td= bot.name
-                                    td= bot.status
-                                    td= bot.lastUpdatedDate
-                                    td= bot.createdDate
+                                    td= intent.name
+                                    td= intent.status
+                                    td= intent.lastUpdatedDate
+                                    td= intent.createdDate

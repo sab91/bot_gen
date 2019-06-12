@@ -13,9 +13,9 @@ block content
                             | Bots
                             span.sr-only (current)
                     li.nav-item
-                        a.nav-link(href='#') Intents
+                        a.nav-link(href='/intents') Intents
                     li.nav-item
-                        a.nav-link(href='#') Services
+                        a.nav-link(href='/test') Test
                     li.nav-item
                         a.nav-link(href='#') Contact
     // Full Page Image Header with Vertically Centered Content
@@ -39,10 +39,3 @@ block content
                             label(for='inputClarification') Clarification invite (*)
                             input#inputClarification.form-control(name='clarification',type='text', placeholder='Quand Amazon Lex ne comprend pas l\'intention de l\'utilisateur',value=params?params.clarificationPrompt.messages[0].content:'')
                         button.btn.btn-primary(type='submit') Create
-
-    // Page Content
-    section.py-5
-        .container
-            h2.font-weight-light Page Content
-            p
-                | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus ab nulla dolorum autem nisi officiis blanditiis voluptatem hic, assumenda aspernatur facere ipsam nemo ratione cumque magnam enim fugiat reprehenderit expedita.

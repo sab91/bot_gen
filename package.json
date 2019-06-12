@@ -10,7 +10,6 @@
   "author": "lo10crew",
   "license": "MIT",
   "dependencies": {
-    "alert-node": "^1.2.5",
     "aws-sdk": "^2.470.0",
     "babel-cli": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
