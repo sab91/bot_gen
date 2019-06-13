@@ -37,19 +37,20 @@ module.exports.update = (req, res) => {
     } 
     else{
       intents = data.intents
+      lexmodelbuildingservice.getBot(paramsGet, function(err, data){
+        if (err) {
+            console.log(err, err.stack);
+        }else {
+          console.log(intents)
+          res.render('updateBot', {
+            bot: data,
+            intents
+          })
+        }
+      })
     }     
   })  
-  lexmodelbuildingservice.getBot(paramsGet, function(err, data){
-    if (err) {
-        console.log(err, err.stack);
-    }else {
-      console.log(intents)
-      res.render('updateBot', {
-        bot: data,
-        intents
-      })
-    }
-  })
+  
 
 }
 module.exports.postUpdate = (req, res) => {
