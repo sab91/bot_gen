@@ -46,5 +46,8 @@ block content
                                         form(action="/gestionBots/update/" + bot.name, method="POST")
                                             .form-group
                                                 input(name="_method",type="hidden",value="PUT")
-                                                input(name="nameBotUpdate", type="hidden", value=bot.name)
                                                 button.btn.btn-primary Update
+                                        form(action="/gestionBots/delete/" + bot.name, method="POST")
+                                            .form-group
+                                                input(name="_method",type="hidden",value="DELETE")
+                                                button.btn.btn-primary Delete        

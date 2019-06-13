@@ -41,7 +41,6 @@ module.exports.update = (req, res) => {
         if (err) {
             console.log(err, err.stack);
         }else {
-          console.log(intents)
           res.render('updateBot', {
             bot: data,
             intents
@@ -62,9 +61,9 @@ module.exports.postUpdate = (req, res) => {
   if(typeof(req.body.intents) === 'string'){
     intents[0] = req.body.intents
   }else{
-    let intents = intents.push.apply(req.body.intents)
+    intents = req.body.intents
+    console.log(intents)
   }
-  
   let intentsMap = intents.map((intent)=> {
     return {
      intentName: intent,
@@ -76,7 +75,9 @@ module.exports.postUpdate = (req, res) => {
               console.log(err, err.stack);
           }else {
               // checksum=data.checksum
-              
+              if(typeof(data.intents) === 'undefined'){
+                data.intents = []
+              }
               let paramsPut = {
                   name: req.params.nameBot,
                   abortStatement: {
@@ -152,7 +153,7 @@ module.exports.postCreate = (req, res) => {
 
   console.log(req.body)
 }
-module.exports.deleteBot = (req,res) =>{
+module.exports.delete = (req,res) =>{
   var params = {
     name: req.params.nameBot
   }

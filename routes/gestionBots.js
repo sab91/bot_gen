@@ -8,4 +8,6 @@ router.post('/create', controller.postCreate)
 
 router.put('/update/:nameBot', controller.update)
 router.post('/update/:nameBot', controller.postUpdate)
+
+router.delete('/delete/:nameBot', controller.delete)
 module.exports = router
