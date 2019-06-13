@@ -3,13 +3,13 @@ block content
     // Navigation
     nav.navbar.navbar-expand-lg.navbar-light.bg-light.shadow.fixed-top
         .container
-            a.navbar-brand(href='/dashboard') Gestion de Bots
+            a.navbar-brand(href='/') Gestion de Bots
             button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarResponsive', aria-controls='navbarResponsive', aria-expanded='false', aria-label='Toggle navigation')
                 span.navbar-toggler-icon
             #navbarResponsive.collapse.navbar-collapse
                 ul.navbar-nav.ml-auto
                     li.nav-item.active
-                        a.nav-link(href='/bots')
+                        a.nav-link(href='/gestionBots')
                             | Bots
                             span.sr-only (current)
                     li.nav-item
@@ -25,13 +25,16 @@ block content
                 .col-12
                     if errorMessage
                         .alert.alert-danger= errorMessage
+                    if errors
+                        each error in errors
+                            .alert.alert-danger= error
                     form(action="/gestionBots/create", method="POST")
                         .form-group
                             label(for='inputNomBot') Nom du bot (*)
-                            input#inputNomBot.form-control(name='nom', type='text', placeholder='1234 Main St', value=params?params.name:'')
+                            input#inputNomBot.form-control(name='nom', type='text', placeholder='Nom du bot', value=params?params.name:'')
                         .form-group
                             label(for='inputDescription') Description
-                            input#inputDescription.form-control(name='description',type='text', placeholder='Apartment, studio, or floor',value=params?params.description:'')
+                            input#inputDescription.form-control(name='description',type='text', placeholder='Description du bot',value=params?params.description:'')
                         .form-group
                             label(for='inputAbandon') Déclaration d'abandon (*)
                             input#inputAbandon.form-control(name='abandon',type='text', placeholder='Quand Bot ne comprend pas la saisie de l\'utilisateur dans son contexte',value=params?params.abortStatement.messages[0].content:'')

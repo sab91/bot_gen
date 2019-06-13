@@ -32,7 +32,9 @@ module.exports.create = (req, res) => {
     }
     else{
       intents = data.intents
-      res.render('createBots',{intents})
+      res.render('createBots',{
+        intents
+      })
     }
   })
 }
