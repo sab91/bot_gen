@@ -1,7 +1,7 @@
 extends layouts/common.pug
 block content
     // Navigation
-    nav.navbar.navbar-expand-lg.navbar-light.bg-light.shadow.fixed-top
+    nav.navbar.navbar-expand-lg.navbar-light.bg-light.shadow
         .container
             a.navbar-brand(href='/dashboard') Gestion de Bots
             button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarResponsive', aria-controls='navbarResponsive', aria-expanded='false', aria-label='Toggle navigation')
@@ -21,7 +21,7 @@ block content
     // Full Page Image Header with Vertically Centered Content
     header.masthead
         .container.h-100
-            .row.h-100.align-items-center
+            .row.align-items-center
                 .col-12
                     if errorMessage
                         .alert.alert-danger= errorMessage

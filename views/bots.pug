@@ -21,7 +21,7 @@ block content
     // Full Page Image Header with Vertically Centered Content
     header.masthead
         .container.h-100
-            .row.h-100.align-items-center
+            .row.align-items-center
                 div
                     a.btn.btn-primary.mt-1(type='button', href='/gestionBots/create').mb-1#createBots Create
                     table.table.table-dark
@@ -46,8 +46,8 @@ block content
                                         form(action="/gestionBots/update/" + bot.name, method="POST")
                                             .form-group
                                                 input(name="_method",type="hidden",value="PUT")
-                                                button.btn.btn-primary Update
+                                                button.btn.btn-primary.customButton Update
                                         form(action="/gestionBots/delete/" + bot.name, method="POST")
                                             .form-group
                                                 input(name="_method",type="hidden",value="DELETE")
-                                                button.btn.btn-primary Delete        
+                                                button.btn.btn-primary.customButton Delete        
