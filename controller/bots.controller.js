@@ -2,6 +2,7 @@ import AWS from 'aws-sdk';
 
 AWS.config.loadFromPath('./config/config.json');
 const lexmodelbuildingservice = new AWS.LexModelBuildingService({ region: 'us-east-1'});
+// list bots
 module.exports.listBots = (req, res) => {
     let paramsGetBots={
         maxResults:50,
@@ -18,9 +19,46 @@ module.exports.listBots = (req, res) => {
       });
 
 }
+// create a new bot
 module.exports.create = (req, res) => {
+  
   res.render('createBots')
 }
+module.exports.postCreate = (req, res) => {
+  let params = {
+    name: req.body.nom,
+    abortStatement: {
+      messages: [{
+        content: req.body.abandon,
+        contentType: "PlainText"
+      }]
+    },
+    childDirected: true,
+    clarificationPrompt: {
+      maxAttempts: 1,
+      messages: [{
+        content: req.body.clarification,
+        contentType: "PlainText"
+      }]
+    },
+    description: req.body.description,
+    idleSessionTTLInSeconds: 300,
+    locale: "en-US",
+    processBehavior: "SAVE"
+  };
+
+  // Lex try
+  lexmodelbuildingservice.putBot(params, function(err, data) {
+    if (err){
+      console.log(err, err.stack)
+      res.render('createBots',{errorMessage:err.message,params:params})
+    }else {
+      res.redirect('/gestionBots')
+    }
+  });
+  console.log(req.body)
+}
+// update a bot
 module.exports.update = (req, res) => {
   var paramsGet = {
     name: req.params.nameBot,
@@ -115,44 +153,7 @@ module.exports.postUpdate = (req, res) => {
           }
   })
 }
-module.exports.putUpdate = (req, res) => {
-}
-module.exports.postCreate = (req, res) => {
-  let params = {
-    name: req.body.nom,
-    abortStatement: {
-      messages: [{
-        content: req.body.abandon,
-        contentType: "PlainText"
-      }]
-    },
-    childDirected: true,
-    clarificationPrompt: {
-      maxAttempts: 1,
-      messages: [{
-        content: req.body.clarification,
-        contentType: "PlainText"
-      }]
-    },
-    description: req.body.description,
-    idleSessionTTLInSeconds: 300,
-    locale: "en-US",
-    processBehavior: "SAVE"
-  };
-
-  // Lex try
-  lexmodelbuildingservice.putBot(params, function(err, data) {
-    if (err){
-      console.log(err, err.stack)
-      res.render('createBots',{errorMessage:err.message,params:params})
-    }else {
-      res.redirect('/gestionBots')
-    }
-  });
-
-
-  console.log(req.body)
-}
+//delete a bot
 module.exports.delete = (req,res) =>{
   var params = {
     name: req.params.nameBot
