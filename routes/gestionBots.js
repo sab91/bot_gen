@@ -5,7 +5,7 @@ const router = express.Router();
 router.get('/', controller.listBots)
 router.get('/create', controller.create)
 router.post('/create', controller.postCreate)
-router.get('/update', controller.update)
-router.put('/update', controller.putUpdate)
-router.delete('/delete/:nameBot', controller.deleteBot)
+
+router.put('/update/:nameBot', controller.update)
+router.post('/update/:nameBot', controller.postUpdate)
 module.exports = router

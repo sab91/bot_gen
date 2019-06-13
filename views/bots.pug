@@ -3,17 +3,17 @@ block content
     // Navigation
     nav.navbar.navbar-expand-lg.navbar-light.bg-light.shadow
         .container
-            a.navbar-brand(href='/dashboard') Gestion de Bots
+            a.navbar-brand(href='/') Gestion de Bots
             button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarResponsive', aria-controls='navbarResponsive', aria-expanded='false', aria-label='Toggle navigation')
                 span.navbar-toggler-icon
             #navbarResponsive.collapse.navbar-collapse
                 ul.navbar-nav.ml-auto
                     li.nav-item.active
-                        a.nav-link(href='/bots')
+                        a.nav-link(href='/gestionBots')
                             | Bots
                             span.sr-only (current)
                     li.nav-item
-                        a.nav-link(href='/intents') Intents
+                        a.nav-link(href='/gestionIntents') Intents
                     li.nav-item
                         a.nav-link(href='/test') Test
                     li.nav-item
@@ -23,7 +23,7 @@ block content
         .container.h-100
             .row.h-100.align-items-center
                 div
-                    a.btn.btn-primary.mt-1(type='button', href='/bots/create').mb-1#createBots Create
+                    a.btn.btn-primary.mt-1(type='button', href='/gestionBots/create').mb-1#createBots Create
                     table.table.table-dark
                         thead
                             tr
@@ -43,12 +43,8 @@ block content
                                     td= bot.lastUpdatedDate
                                     td= bot.createdDate
                                     td
-                                      .row
-                                        .col-12
-                                          form(action="/bots/update", method="GET")
-                                            input#inputNomBot.form-control(name='nom', type='hidden',value=bot.name)
-                                            button(type='submit') Modify
-                                        .col-12
-                                          form(action="/bots/delete/" + bot.name, method="DELETE")
-                                            input#inputNomBot.form-control(name='nom', type='hidden',value=bot.name)
-                                            button(type='submit') Delete
+                                        form(action="/gestionBots/update/" + bot.name, method="POST")
+                                            .form-group
+                                                input(name="_method",type="hidden",value="PUT")
+                                                input(name="nameBotUpdate", type="hidden", value=bot.name)
+                                                button.btn.btn-primary Update
