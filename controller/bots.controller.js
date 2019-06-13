@@ -21,10 +21,35 @@ module.exports.listBots = (req, res) => {
 }
 // create a new bot
 module.exports.create = (req, res) => {
-  
-  res.render('createBots')
+  var paramsIntents = {
+    maxResults: 10,
+    nextToken: ""
+   };
+  let intents = []
+  lexmodelbuildingservice.getIntents(paramsIntents, function(err, data) {
+    if (err){
+    console.log(err, err.stack); // an error occurred
+    }
+    else{
+      intents = data.intents
+      res.render('createBots',{intents})
+    }
+  })
 }
 module.exports.postCreate = (req, res) => {
+  let intents = [];
+  if(typeof(req.body.intents) === 'string'){
+    intents[0] = req.body.intents
+  }else{
+    intents = req.body.intents
+    console.log(intents)
+  }
+  let intentsMap = intents.map((intent)=> {
+    return {
+     intentName: intent,
+     intentVersion: "$LATEST"
+   }
+   });
   let params = {
     name: req.body.nom,
     abortStatement: {
@@ -41,12 +66,12 @@ module.exports.postCreate = (req, res) => {
         contentType: "PlainText"
       }]
     },
+    intents:intentsMap,
     description: req.body.description,
     idleSessionTTLInSeconds: 300,
     locale: "en-US",
     processBehavior: "SAVE"
   };
-
   // Lex try
   lexmodelbuildingservice.putBot(params, function(err, data) {
     if (err){
@@ -56,7 +81,6 @@ module.exports.postCreate = (req, res) => {
       res.redirect('/gestionBots')
     }
   });
-  console.log(req.body)
 }
 // update a bot
 module.exports.update = (req, res) => {
@@ -65,29 +89,42 @@ module.exports.update = (req, res) => {
     versionOrAlias: "$LATEST"
   }
   var paramsIntents = {
-    maxResults: 10, 
+    maxResults: 10,
     nextToken: ""
    };
-  let intents = [] 
+  let intents = []
   lexmodelbuildingservice.getIntents(paramsIntents, function(err, data) {
     if (err){
     console.log(err, err.stack); // an error occurred
-    } 
+    }
     else{
       intents = data.intents
+      console.log(intents);
       lexmodelbuildingservice.getBot(paramsGet, function(err, data){
         if (err) {
             console.log(err, err.stack);
         }else {
+          console.log(data.intents);
+          var intentCheckeds = data.intents.map((item)=>{
+            return item.intentName
+          })
+          var intentNotCheckeds = intents.filter((item)=>{
+            return !intentCheckeds.includes(item.name)
+          }).map((item)=>{
+            return item.name
+          })
+          console.log(intentNotCheckeds);
+          console.log(intentCheckeds);
           res.render('updateBot', {
             bot: data,
-            intents
+            intentNotCheckeds,
+            intentCheckeds,
           })
         }
       })
-    }     
-  })  
-  
+    }
+  })
+
 
 }
 module.exports.postUpdate = (req, res) => {
@@ -138,7 +175,6 @@ module.exports.postUpdate = (req, res) => {
                   processBehavior: "SAVE",
                   checksum:data.checksum,
                   intents:[
-                      ...data.intents,
                       ...intentsMap
                   ],
                 };
