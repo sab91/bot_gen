@@ -1,4 +1,4 @@
-
+config/lex-web-ui-loader-config.json
 config/config.json
 # Don't track content of these folders
 node_modules/

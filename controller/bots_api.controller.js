@@ -54,7 +54,7 @@ module.exports.create = (req, res) => {
         description: req.body.description,
         idleSessionTTLInSeconds: 300,
         locale: "en-US",
-        processBehavior: "SAVE"
+        processBehavior: "BUILD"
       };
     
       // Lex try

@@ -6,11 +6,13 @@ const gestionBots = require('./routes/gestionBots')
 const bots_api = require('./routes/bots_api')
 const intents = require('./routes/intents')
 const methodOverride = require('method-override')
+const cors = require('cors')
+
 
 import AWS from 'aws-sdk'
 
 const app = express();
-const lexmodelbuildingservice = new AWS.LexModelBuildingService({ region: 'us-east-1'});
+app.use(cors())
 
 app.use(express.static('public'))
 app.set('view engine', 'pug');

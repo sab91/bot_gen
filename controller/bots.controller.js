@@ -72,7 +72,7 @@ module.exports.postCreate = (req, res) => {
     description: req.body.description,
     idleSessionTTLInSeconds: 300,
     locale: "en-US",
-    processBehavior: "SAVE"
+    processBehavior: "BUILD"
   };
   // Lex try
   lexmodelbuildingservice.putBot(params, function(err, data) {
