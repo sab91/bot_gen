@@ -37,10 +37,17 @@ app.get('/api/v1/todos', (req, res) => {
         todos: db
     })
 });
+
+
+//test Bot
+app.get('/test',(req,res)=>{
+  res.render('testbot')
+})
 //interface
 app.use('/', dashboard);
 app.use('/gestionBots', gestionBots);
 app.use('/gestionIntents', intents);
+
 //api
 app.use('/bots', bots_api)
 const PORT = 5000;
