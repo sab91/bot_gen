@@ -34,6 +34,19 @@ module.exports.bot = (req, res) => {
     })
 }
 module.exports.create = (req, res) => {
+  let intents = [];
+  if(typeof(req.body.intents) === 'string'){
+    intents[0] = req.body.intents
+  }else{
+    intents = req.body.intents
+    console.log(intents)
+  }
+  let intentsMap = intents.map((intent)=> {
+    return {
+     intentName: intent,
+     intentVersion: "$LATEST"
+   }
+   });
 
     let params = {
         name: req.body.nom,
@@ -51,6 +64,7 @@ module.exports.create = (req, res) => {
             contentType: "PlainText"
           }]
         },
+        intents:intentsMap,
         description: req.body.description,
         idleSessionTTLInSeconds: 300,
         locale: "en-US",
@@ -72,23 +86,37 @@ module.exports.create = (req, res) => {
 module.exports.update = (req, res) => {
 
     // var checksum = null
-
+    console.log(req.body)
     var paramsGet = {
-        name: req.params.nameBot,
-        versionOrAlias: "$LATEST"
+      name: req.params.nameBot,
+      versionOrAlias: "$LATEST"
     }
-
+    let intents = [];
+    if(typeof(req.body.intents) === 'string'){
+      intents[0] = req.body.intents
+    }else{
+      intents = req.body.intents
+      console.log(intents)
+    }
+    let intentsMap = intents.map((intent)=> {
+      return {
+       intentName: intent,
+       intentVersion: "$LATEST"
+     }
+     });
     lexmodelbuildingservice.getBot(paramsGet, function(err, data){
             if (err) {
                 console.log(err, err.stack);
             }else {
                 // checksum=data.checksum
-                
+                if(typeof(data.intents) === 'undefined'){
+                  data.intents = []
+                }
                 let paramsPut = {
                     name: req.params.nameBot,
                     abortStatement: {
                       messages: [{
-                        content: req.body.abandon,
+                        content: req.body.abandon || data.abortStatement.messages[0].content,
                         contentType: "PlainText"
                       }]
                     },
@@ -96,21 +124,17 @@ module.exports.update = (req, res) => {
                     clarificationPrompt: {
                       maxAttempts: 1,
                       messages: [{
-                        content: req.body.clarification,
+                        content: req.body.clarification || data.clarificationPrompt.messages[0].content,
                         contentType: "PlainText"
                       }]
                     },
-                    description: req.body.description,
+                    description: req.body.description || data.description,
                     idleSessionTTLInSeconds: 300,
                     locale: "en-US",
-                    processBehavior: "SAVE",
+                    processBehavior: "BUILD",
                     checksum:data.checksum,
                     intents:[
-                        ...data.intents,
-                        {
-                        intentName: req.body.intentName, 
-                        intentVersion: "$LATEST"
-                        }
+                      ...intentsMap
                     ],
                   };
                 lexmodelbuildingservice.putBot(paramsPut, function(err, data) {
